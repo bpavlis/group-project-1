@@ -1,7 +1,7 @@
 body,
 html {
   height: 100%;
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
   font-family: 'Helvetica', sans-serif;
   height: 100%;
@@ -14,17 +14,20 @@ html {
 
 nav {
   display: flex;
-  background-color: bisque;
 }
 
-h2 {
+.h2-text {
   display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 200px;
+
   border: 3px solid black;
   border-radius: 10px;
   background-color: white;
-  margin-left: 300px;
-  margin-right: 300px;
-
+  padding: 7px;
 }
 
 #h1-header {
