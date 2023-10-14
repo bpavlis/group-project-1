@@ -1,3 +1,15 @@
+var cardOne = document.querySelector("#cardOne");
+var cardTwo = document.querySelector("#cardTwo");
+var cardOneBtn = document.querySelector("#cardOneBtn");
+var cardTwoBtn = document.querySelector("#cardTwoBtn");
+var cardOneImg = document.querySelector("#cardOneImg");
+var cardTwoImg = document.querySelector("#cardTwoImg");
+var cardOnePlayer = document.querySelector("#name1");
+var cardTwoPlayer = document.querySelector("#name2");
+var cardOneValue = document.querySelector("#value1");
+var cardTwoValue = document.querySelector("#value2");
+
+
 /* branch name js-pseudo
 notes
 -cards and styling done through html and css for the most part
