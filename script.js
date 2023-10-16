@@ -1,3 +1,4 @@
+var cardContainer = document.querySelector("#cards-container");
 var cardOne = document.querySelector("#cardOne");
 var cardTwo = document.querySelector("#cardTwo");
 var cardOneBtn = document.querySelector("#cardOneBtn");
@@ -10,22 +11,141 @@ var cardOneValue = document.querySelector("#value1");
 var cardTwoValue = document.querySelector("#value2");
 
 
-async function getPlayers(teamId) {
-    const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
-        method: "GET",
-        headers: {
-            "x-rapidapi-key": "d561b7308ece78af36ebe4724aa26c96"
-        }
-    })
-    return await resp.json()
+// async function getPlayers(teamId) {
+//     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
+//         method: "GET",
+//         headers: {
+//             "x-rapidapi-key": "585f72dcc62f7fb3e27e941dab0f429f"
+//         }
+//     })
+//     return await resp.json()
+// }
+
+// async function start() {
+//     const players = await getPlayers(32)
+//     console.log(players)
+// }
+// start();
+
+
+var players = [
+    {
+        name: "Aaron",
+        salary: 1000
+
+    },
+    {
+        name: "Bart",
+        salary: 2000
+
+    },
+    {
+        name: "Caleb",
+        salary: 3000
+
+    },
+    {
+        name: "Danny",
+        salary: 4000
+
+    },
+    {
+        name: "Elton",
+        salary: 5000
+
+    },
+    {
+        name: "Freddie",
+        salary: 6000
+
+    },
+    {
+        name: "George",
+        salary: 7000
+
+    },
+    {
+        name: "Harold",
+        salary: 8000
+
+    },
+    {
+        name: "Isaiah",
+        salary: 9000
+
+    },
+    {
+        name: "John",
+        salary: 10000
+
+    }
+]
+
+var randomPlayer1 = "";
+var randomPlayer2 = "";
+var cardOneSal = "";
+var cardTwoSal = "";
+var pointTally = 0;
+console.log(randomPlayer1, randomPlayer2)
+
+populatePlayers()
+
+function populatePlayers() {
+    randomPlayer1 = Math.floor(Math.random() * players.length);
+    randomPlayer2 = Math.floor(Math.random() * players.length);
+    cardOneSal = players[randomPlayer1].salary;
+    cardTwoSal = players[randomPlayer2].salary;
+    const ranPlay1 = players[randomPlayer1].name;
+    const ranPlay2 = players[randomPlayer2].name;
+    console.log(ranPlay1, ranPlay2);
+
+    cardOnePlayer.textContent = ranPlay1;
+    cardTwoPlayer.textContent = ranPlay2;
+    console.log("this function works!");
 }
 
-async function start() {
-    const players = await getPlayers(2)
-    console.log(players)
-}
+cardOneBtn.addEventListener("click", function () {
+    if (cardOneSal > cardTwoSal) {
+        pointTally++
+    } else if (cardOneSal < cardTwoSal) {
+        console.log("wrong!")
+    } else if (cardOneSal === cardTwoSal) {
+        pointTally++
+    }
 
-start()
+    console.log(pointTally);
+    populatePlayers();
+})
+
+
+cardTwoBtn.addEventListener("click", function () {
+    if (cardOneSal < cardTwoSal) {
+        pointTally++
+    } else if (cardOneSal > cardTwoSal) {
+        console.log("wrong!")
+    } else if (cardOneSal === cardTwoSal) {
+        pointTally++
+    }
+    console.log(pointTally);
+    populatePlayers();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //https://v1.american-football.api-sports.io/players?team=1&season=2022
