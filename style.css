@@ -85,7 +85,6 @@ span a {
   align-items: center;
 }
 
-/* comment */
 .avatar {
   width: 150px;
   height: 150px;
@@ -140,4 +139,11 @@ img {
   margin-top: 250px;
   margin-left: 350px;
   margin-right: 500px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
