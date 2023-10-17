@@ -9,205 +9,141 @@ var cardOnePlayer = document.querySelector("#name1");
 var cardTwoPlayer = document.querySelector("#name2");
 var cardOneValue = document.querySelector("#value1");
 var cardTwoValue = document.querySelector("#value2");
+var players;
+var indPlayers = [];
 
+async function getPlayers(teamId) {
+    const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
+        method: "GET",
+        headers: {
+            "x-rapidapi-key": "1838aed2376d7324a28d626fe9524ba0"
+            // samiye: d52a11a4ff1c64263398d6e91826d199
+            //grant: 8a595064b007930f5bae0de0827aeeb9
+        }
+    })
+    return await resp.json()
+}
+start();
 
-// async function getPlayers(teamId) {
-//     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
-//         method: "GET",
-//         headers: {
-//             "x-rapidapi-key": "585f72dcc62f7fb3e27e941dab0f429f"
-//         }
-//     })
-//     return await resp.json()
-// }
+async function start() {
+    // var players = await Promise.all([...Array(4)].map((num, index) => getPlayers(index + 1)))
+    players = await Promise.all([32, 16, 15, 7].map((num) => getPlayers(num)))
+    console.log(players);
+    indPlayers = [...players[0].response, ...players[1].response, ...players[2].response, ...players[3].response];
+    // console.log(indPlayers);
+    populatePlayers();
+}
 
-// async function start() {
-//     const players = await getPlayers(32)
-//     console.log(players)
-// }
-// start();
+function parseArr(arr) {
+    var newArr = arr.filter(player => {
+        return player.salary !== null
+    });
+    var newArr1 = newArr.filter(player => {
+        return player.salary[0] === "$" || player.salary[0] === "(";
+    })
+    newArr1.forEach(player => {
+        let str = "";
+        for (let digit of player.salary) {
 
+            if (!isNaN(parseInt(digit))) {
+                str += digit;
+            }
+        }
+        var num = parseInt(str);
+        player.salNum = num;
+        // console.log(player);
+        // console.log(player.salary);
+    })
+    // if (typeof player.salary !== "string") {
+    //     console.log(player.name, player.salary)
+    // } else if (player.salary[0] !== "$") {
+    //     console.log(player.salary)
+    // }
 
-var players = [
-    {
-        name: "Aaron",
-        salary: 1000
+    // newArr = arr.filter(player => {
+    //     return player.salary.startsWith("$");
+    // });
 
-    },
-    {
-        name: "Bart",
-        salary: 2000
+    // arr.filter(([key, value]) => typeof value !== null);
+    // arr.filter(player => player.salary.startsWith("$"));
+    // console.log(newArr1);
+    indPlayers = newArr1;
+}
 
-    },
-    {
-        name: "Caleb",
-        salary: 3000
-
-    },
-    {
-        name: "Danny",
-        salary: 4000
-
-    },
-    {
-        name: "Elton",
-        salary: 5000
-
-    },
-    {
-        name: "Freddie",
-        salary: 6000
-
-    },
-    {
-        name: "George",
-        salary: 7000
-
-    },
-    {
-        name: "Harold",
-        salary: 8000
-
-    },
-    {
-        name: "Isaiah",
-        salary: 9000
-
-    },
-    {
-        name: "John",
-        salary: 10000
-
-    }
-]
 
 var randomPlayer1 = "";
 var randomPlayer2 = "";
 var cardOneSal = "";
 var cardTwoSal = "";
 var pointTally = 0;
+var wrongAns = 0;
 console.log(randomPlayer1, randomPlayer2)
 
-populatePlayers()
 
 function populatePlayers() {
-    randomPlayer1 = Math.floor(Math.random() * players.length);
-    randomPlayer2 = Math.floor(Math.random() * players.length);
-    cardOneSal = players[randomPlayer1].salary;
-    cardTwoSal = players[randomPlayer2].salary;
-    const ranPlay1 = players[randomPlayer1].name;
-    const ranPlay2 = players[randomPlayer2].name;
-    console.log(ranPlay1, ranPlay2);
-
+    parseArr(indPlayers);
+    console.log(indPlayers);
+    randomPlayer1 = Math.floor(Math.random() * indPlayers.length);
+    randomPlayer2 = Math.floor(Math.random() * indPlayers.length);
+    // if (indPlayers[randomPlayer1].salary === "null" || indPlayers[randomPlayer1].salary === "0-" || indPlayers[randomPlayer1].salary === "-") {
+    //     randomPlayer1 = Math.floor(Math.random() * indPlayers.length);
+    // };
+    // if (indPlayers[randomPlayer2].salary === "null" || indPlayers[randomPlayer2].salary === "0-" || indPlayers[randomPlayer2].salary === "-") {
+    //     randomPlayer2 = Math.floor(Math.random() * indPlayers.length);
+    // };
+    cardOneSal = indPlayers[randomPlayer1].salNum;
+    cardTwoSal = indPlayers[randomPlayer2].salNum;
+    const ranPlay1 = indPlayers[randomPlayer1].name;
+    const ranPlay2 = indPlayers[randomPlayer2].name;
+    cardOneValue.textContent = `Salary: ${indPlayers[randomPlayer1].salary}`
+    cardOneImg.src = indPlayers[randomPlayer1].image
+    cardTwoImg.src = indPlayers[randomPlayer2].image
+    cardTwoValue.textContent = `Salary: ${indPlayers[randomPlayer2].salary}`
     cardOnePlayer.textContent = ranPlay1;
     cardTwoPlayer.textContent = ranPlay2;
-    console.log("this function works!");
 }
 
 cardOneBtn.addEventListener("click", function () {
     if (cardOneSal > cardTwoSal) {
-        pointTally++
+        pointTally++;
     } else if (cardOneSal < cardTwoSal) {
-        console.log("wrong!")
-    } else if (cardOneSal === cardTwoSal) {
-        pointTally++
-    }
+        wrongAns++;
+        console.log(wrongAns + " wrong guesses");
+        // if (wrongAns === 3) {
+        //     endGame();
 
-    console.log(pointTally);
+    } else if (cardOneSal === cardTwoSal) {
+        pointTally++;
+    }
+    console.log(pointTally + " correct guesses");
     populatePlayers();
 })
 
 
 cardTwoBtn.addEventListener("click", function () {
     if (cardOneSal < cardTwoSal) {
-        pointTally++
+        pointTally++;
     } else if (cardOneSal > cardTwoSal) {
-        console.log("wrong!")
+        wrongAns++;
+        console.log(wrongAns + " wrong guesses");
+        // if (wrongAns === 3) {
+        //     endGame();
+
     } else if (cardOneSal === cardTwoSal) {
-        pointTally++
+        pointTally++;
     }
-    console.log(pointTally);
+
+    console.log(pointTally + " correct guesses");
     populatePlayers();
 })
 
 
 
+function endGame() {
+    console.log("end the game!");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 //https://v1.american-football.api-sports.io/players?team=1&season=2022
 
-
-// function getApi() {
-//     // fetch request gets a list of all the repos for the node.js organization
-//     var requestUrl = 'https://api.github.com/orgs/nodejs/repos';
-
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-//             //Loop over the data to generate a table, each table row will have a link to the repo url
-//             for (var i = 0; i < data.length; i++) {
-//                 // Creating elements, tablerow, tabledata, and anchor
-//                 var createTableRow = document.createElement('tr');
-//                 var tableData = document.createElement('td');
-//                 var link = document.createElement('a');
-
-//                 // Setting the text of link and the href of the link. this specifies the property within the data
-//                 link.textContent = data[i].html_url;
-//                 link.href = data[i].html_url;
-
-//                 // Appending the link to the tabledata and then appending the tabledata to the tablerow
-//                 // The tablerow then gets appended to the tablebody
-//                 tableData.appendChild(link);
-//                 createTableRow.appendChild(tableData);
-//                 tableBody.appendChild(createTableRow);
-//             }
-//         });
-// }
-
-
-/* branch name js-pseudo 
-notes 
--cards and styling done through html and css for the most part 
--will need to start by defining variables with query selectors 
--will need to isolate the data points we want from the API 
--create a function that 
-    a) randomly pulls player data from API array 
-    b) displays on the page using a for loop 
-    c) will need variables that specifically signify the number value at any given index
--separate function for user choice- this will contain logic for keeping score, and if statements to make sure the correct value is being attributed during gameplay. make this an event listener function? 
--at end of game, we will need some kind of button that leads to scoreboard page? do we want the user to input their name on this window, or the score window? to discuss 
-
--if modal for instructions on navbar, the js will need to be on all three files for consistency 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
