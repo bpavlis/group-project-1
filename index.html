@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Tilt+Neon&family=Zen+Loop&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <title>Higher-Lower Game: NFL Salaries</title>
@@ -37,29 +39,30 @@
       </div>
     </div>
   </nav>
-
-  <div id="cards-container" class="center">
-    <div id="cardOne" class="card" style="width: 18rem;">
-      <img id="cardOneImg" class="card-img-top" src="https://pngfre.com/wp-content/uploads/American-Football-6.png"
-        alt="Card image cap">
-      <div class="card-body">
-        <h5 id="name1" class="card-title">Card title</h5>
-        <p id="value1" class="card-text">What do we want here?
-        </p>
-        <a id="cardOneBtn" href="#" class="btn btn-primary">This player!</a>
+  <div id="content-container">
+    <div class="question justify-content-center">
+      <h6>Which player has the higher salary?</h6>
+    </div>
+    <div id="cards-container">
+      <div id="cardOne" class="card" style="width: 20rem;">
+        <img id="cardOneImg" class="card-img-top" src="https://pngfre.com/wp-content/uploads/American-Football-6.png"
+          alt="placeholder image of a football, otherwise, a generated image of a random NFL player.">
+        <div class="card-body">
+          <h5 id="name1" class="card-title">Player Name</h5>
+          <p id="value1" class="card-text">Player Salary</p>
+          <a id="cardOneBtn" href="#" class="btn btn-success">This Player!</a>
+        </div>
       </div>
-    </div>
-    <div class="h2-text justify-content-center" class="question">
-      <h6 class="justify-content-center">Which player has the higher salary?</h6>
-    </div>
-    <div id="cardTwo" class="card" style="width: 18rem;">
-      <img id="cardTwoImg" class="card-img-top" src="https://pngfre.com/wp-content/uploads/American-Football-6.png"
-        alt="Card image cap">
-      <div class="card-body">
-        <h5 id="name2" class="card-title">Card title</h5>
-        <p id="value2" class="card-text">Salary: $______?
-        </p>
-        <a id="cardTwoBtn" href="#" class="btn btn-primary">This player!</a>
+
+      <div id="cardTwo" class="card" style="width: 20rem;">
+        <img id="cardTwoImg" class="card-img-top" src="https://pngfre.com/wp-content/uploads/American-Football-6.png"
+          alt="placeholder image of a football, otherwise, a generated image of a random NFL player.">
+        <div class="card-body">
+          <h5 id="name2" class="card-title">Player Name</h5>
+          <p id="value2" class="card-text">Salary: $______?
+          </p>
+          <a id="cardTwoBtn" href="#" class="btn btn-success">This Player!</a>
+        </div>
       </div>
     </div>
   </div>
