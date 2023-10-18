@@ -77,12 +77,18 @@ p {
 
 }
 
+.question-container {
+  display: flex;
+  justify-content: center;
+}
+
+
 .question {
   text-align: center;
   padding: 10px;
   margin-top: 135px;
   margin-bottom: 50px;
-  margin-left: 37%;
+  /* margin-left: 37%; */
   font-family: 'Tilt Neon', sans-serif;
   border: 3px solid black;
   border-radius: 10px;
