@@ -12,6 +12,7 @@ This data is pulled from [API-AMERICAN-FOOTBALL (1.4.7)](https://api-sports.io/d
 ## Final Screenshots
 ![Landing Screenshot](./images/group-project-1_landing-screenshot.png)  
 ![Game Screenshot](./images/group-project-1_game-screenshot.png)  
+![Save Score Screenshot](./images/group-project-1_save-score-screenshot.png)
 ![Scoreboard Screenshot](./images/group-project-1_scoreboard-screenshot.png)  
 
 ## Links
