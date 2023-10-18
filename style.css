@@ -16,6 +16,10 @@ html {
   display: none;
 }
 
+.hide-score {
+  visibility: hidden;
+}
+
 nav {
   display: flex;
 }
@@ -24,9 +28,57 @@ nav {
   display: flex;
   justify-content: center;
   position: absolute;
-  margin-left: 300px;
-  margin-right: 300px;
+  font-family: 'Tilt Neon', sans-serif;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: var(--lightgrn);
+  padding: 7px;
+}
 
+.content-score {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+  margin: 2px;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+#return-button,
+#clear-scores,
+#save-button {
+  width: 100%;
+  border: 3px solid #28a745;
+  margin: 1px;
+}
+
+.index-score {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 400px;
+}
+
+#scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  font-family: 'Tilt Neon', sans-serif;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: var(--lightgrn);
+  padding: 7px;
+
+}
+
+.score-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
   font-family: 'Tilt Neon', sans-serif;
   border: 3px solid black;
   border-radius: 10px;
@@ -101,6 +153,10 @@ p {
 }
 
 #scoreboard {
+  margin-top: 200px;
+}
+
+.score-wrapper {
   margin-top: 200px;
 }
 

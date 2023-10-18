@@ -1,6 +1,20 @@
-/*
--if modal for instructions on navbar, the js will need to be on all three files for consistency 
--this is where we will need to focus on local storage:
- a) using JSON and localStorage to successfully save input data
- b) dynamically diplaying whatever is already stored in local while displaying new scored in real time 
-*/ 
+let highScores = JSON.parse(localStorage.getItem("score")) || [];
+var clearBtn = document.querySelector("#clear-scores");
+
+highScores.sort(function (m, n) {
+    return n.score - m.score
+});
+
+let olEl = document.querySelector("#score-list");
+console.log(highScores);
+for (let i = 0; i < highScores.length; i++) {
+    let listEl = document.createElement("li");
+    listEl.textContent = "Name: " + highScores[i].name + " - Points: " + highScores[i].points;
+
+    olEl.appendChild(listEl);
+}
+
+clearBtn.addEventListener("click", function () {
+    localStorage.removeItem("score");
+    window.location.reload();
+});

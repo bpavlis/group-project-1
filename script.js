@@ -1,3 +1,4 @@
+var indexScore = document.querySelector(".index-score");
 var contentContainer = document.querySelector("#content-container");
 var cardContainer = document.querySelector("#cards-container");
 var cardOne = document.querySelector("#cardOne");
@@ -23,11 +24,12 @@ async function getPlayers(teamId) {
     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
         method: "GET",
         headers: {
-            "x-rapidapi-key": "d52a11a4ff1c64263398d6e91826d199"
+            "x-rapidapi-key": "d561b7308ece78af36ebe4724aa26c96"
             // samiye: d52a11a4ff1c64263398d6e91826d199
             //grant: 8a595064b007930f5bae0de0827aeeb9
-            //1838aed2376d7324a28d626fe9524ba0
+            //leah: d561b7308ece78af36ebe4724aa26c96
             //ben: 585f72dcc62f7fb3e27e941dab0f429f
+            //katy: c50b729f3197bab6789dbfca58ae1053
         }
     })
     return await resp.json()
@@ -88,7 +90,6 @@ function populatePlayers() {
     cardOneValue.textContent = `Salary: ${indPlayers[randomPlayer1].salary}`
     cardOneImg.src = indPlayers[randomPlayer1].image
     cardTwoImg.src = indPlayers[randomPlayer2].image
-    cardTwoValue.textContent = `Salary: ${indPlayers[randomPlayer2].salary}`
     cardOnePlayer.textContent = ranPlay1;
     cardTwoPlayer.textContent = ranPlay2;
 }
@@ -136,11 +137,14 @@ cardTwoBtn.addEventListener("click", function () {
 
 function endGame() {
     console.log("the endGame function is working!")
-    var scoreText = `End of quiz! Your score is ${pointTally}!`;
+    var scoreText = `You got three wrong, so the game has ended! Your score is ${pointTally}!`;
     var initialDiv = document.querySelector("#initials");
     initialBox = document.createElement("input");
 
     contentContainer.setAttribute("class", "hide");
+
+
+
 
     scoreBoard.removeAttribute("class");
     finalScore.textContent = scoreText.toString();
