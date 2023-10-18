@@ -1,18 +1,15 @@
+:root {
+  --lightgrn: rgb(184, 208, 188);
+}
+
 body,
 html {
-  height: 100%;
-  /* margin: 0; */
-  padding: 0;
-  font-family: 'Helvetica', sans-serif;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 25px;
+  font-family: 'Tilt Neon', sans-serif;
   background-image: url(https://static.vecteezy.com/system/resources/previews/016/128/944/non_2x/superbowl-american-football-stadium-background-in-night-sky-free-vector.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
 }
 
 nav {
@@ -25,11 +22,11 @@ nav {
   position: absolute;
   margin-left: 300px;
   margin-right: 300px;
-  margin-top: 200px;
 
+  font-family: 'Tilt Neon', sans-serif;
   border: 3px solid black;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--lightgrn);
   padding: 7px;
 }
 
@@ -45,10 +42,62 @@ nav {
 }
 
 p {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: light;
-  color: #333333;
+  color: var(--lightgrn);
+  font-family: 'Tilt Neon', sans-serif;
 }
+
+#cardOneBtn,
+#cardTwoBtn {
+  border: 3px solid #28a745;
+}
+
+#cards-container {
+  place-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card-title {
+  font-family: 'Tilt Neon', sans-serif;
+}
+
+.card {
+  font-family: 'Tilt Neon', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: var(--lightgrn);
+
+}
+
+.question-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.question {
+  text-align: center;
+  padding: 10px;
+  margin-top: 135px;
+  margin-bottom: 50px;
+  /* margin-left: 37%; */
+  font-family: 'Tilt Neon', sans-serif;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: var(--lightgrn);
+  width: 350px;
+}
+
+
+/* floating button on landing page */
 
 span a {
   font-size: 18px;
@@ -98,6 +147,7 @@ span a {
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
   transform: translatey(0px);
   animation: float 6s ease-in-out infinite;
+  margin-top: 300px;
 
   img {
     width: 100%;
@@ -132,28 +182,4 @@ img {
     width: 100%;
     height: auto;
   }
-}
-
-/* #cards-container {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  margin-top: 250px;
-  margin-left: 350px;
-  margin-right: 500px;
-}
-
-.card {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
-/* } */
-
-.center {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 100px;
 }
