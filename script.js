@@ -16,9 +16,11 @@ async function getPlayers(teamId) {
     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
         method: "GET",
         headers: {
-            "x-rapidapi-key": "1838aed2376d7324a28d626fe9524ba0"
+            "x-rapidapi-key": "585f72dcc62f7fb3e27e941dab0f429f"
             // samiye: d52a11a4ff1c64263398d6e91826d199
             //grant: 8a595064b007930f5bae0de0827aeeb9
+            //1838aed2376d7324a28d626fe9524ba0
+            //ben: 585f72dcc62f7fb3e27e941dab0f429f
         }
     })
     return await resp.json()
@@ -117,6 +119,7 @@ cardOneBtn.addEventListener("click", function () {
     }
     console.log(pointTally + " correct guesses");
     populatePlayers();
+    endGame();
 })
 
 
@@ -135,13 +138,21 @@ cardTwoBtn.addEventListener("click", function () {
 
     console.log(pointTally + " correct guesses");
     populatePlayers();
+    endGame();
 })
 
 
-
+// not sure exactly what we want to happen when game ends
 function endGame() {
-    console.log("end the game!");
-
+    if (wrongAns >= 3){
+        alert("You Lost!");
+        //update points back to 0?
+        // pointTally = 0;
+        console.log(pointTally)
+        //reloads page when clicking confirm
+        location.reload();
+        return
+    }
 }
 
 
