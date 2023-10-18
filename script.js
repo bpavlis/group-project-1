@@ -1,3 +1,4 @@
+var contentContainer = document.querySelector("#content-container");
 var cardContainer = document.querySelector("#cards-container");
 var cardOne = document.querySelector("#cardOne");
 var cardTwo = document.querySelector("#cardTwo");
@@ -11,13 +12,18 @@ var cardOneValue = document.querySelector("#value1");
 var cardTwoValue = document.querySelector("#value2");
 var players;
 var indPlayers = [];
+var initialBox;
+
+
+var scoreBoard = document.querySelector("#scoreboard"); //scoreboard as a whole
+var finalScore = document.querySelector("#score"); // user score
+var saveButton = document.querySelector("#save-button");
 
 async function getPlayers(teamId) {
     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
         method: "GET",
         headers: {
-
-            "x-rapidapi-key": "585f72dcc62f7fb3e27e941dab0f429f"
+            "x-rapidapi-key": "d52a11a4ff1c64263398d6e91826d199"
             // samiye: d52a11a4ff1c64263398d6e91826d199
             //grant: 8a595064b007930f5bae0de0827aeeb9
             //1838aed2376d7324a28d626fe9524ba0
@@ -54,22 +60,9 @@ function parseArr(arr) {
         }
         var num = parseInt(str);
         player.salNum = num;
-        // console.log(player);
-        // console.log(player.salary);
+
     })
-    // if (typeof player.salary !== "string") {
-    //     console.log(player.name, player.salary)
-    // } else if (player.salary[0] !== "$") {
-    //     console.log(player.salary)
-    // }
 
-    // newArr = arr.filter(player => {
-    //     return player.salary.startsWith("$");
-    // });
-
-    // arr.filter(([key, value]) => typeof value !== null);
-    // arr.filter(player => player.salary.startsWith("$"));
-    // console.log(newArr1);
     indPlayers = newArr1;
 }
 
@@ -85,15 +78,9 @@ console.log(randomPlayer1, randomPlayer2)
 
 function populatePlayers() {
     parseArr(indPlayers);
-    console.log(indPlayers);
+    // console.log(indPlayers);
     randomPlayer1 = Math.floor(Math.random() * indPlayers.length);
     randomPlayer2 = Math.floor(Math.random() * indPlayers.length);
-    // if (indPlayers[randomPlayer1].salary === "null" || indPlayers[randomPlayer1].salary === "0-" || indPlayers[randomPlayer1].salary === "-") {
-    //     randomPlayer1 = Math.floor(Math.random() * indPlayers.length);
-    // };
-    // if (indPlayers[randomPlayer2].salary === "null" || indPlayers[randomPlayer2].salary === "0-" || indPlayers[randomPlayer2].salary === "-") {
-    //     randomPlayer2 = Math.floor(Math.random() * indPlayers.length);
-    // };
     cardOneSal = indPlayers[randomPlayer1].salNum;
     cardTwoSal = indPlayers[randomPlayer2].salNum;
     const ranPlay1 = indPlayers[randomPlayer1].name;
@@ -111,16 +98,17 @@ cardOneBtn.addEventListener("click", function () {
         pointTally++;
     } else if (cardOneSal < cardTwoSal) {
         wrongAns++;
-        console.log(wrongAns + " wrong guesses");
-        // if (wrongAns === 3) {
-        //     endGame();
-
     } else if (cardOneSal === cardTwoSal) {
         pointTally++;
     }
+
+    if (wrongAns === 3) {
+        endGame();
+        return
+    }
+    console.log(wrongAns + " wrong guesses");
     console.log(pointTally + " correct guesses");
     populatePlayers();
-    endGame();
 })
 
 
@@ -130,31 +118,55 @@ cardTwoBtn.addEventListener("click", function () {
     } else if (cardOneSal > cardTwoSal) {
         wrongAns++;
         console.log(wrongAns + " wrong guesses");
-        // if (wrongAns === 3) {
-        //     endGame();
 
     } else if (cardOneSal === cardTwoSal) {
         pointTally++;
     }
 
+    if (wrongAns === 3) {
+        endGame();
+        return
+    }
+
     console.log(pointTally + " correct guesses");
     populatePlayers();
-    endGame();
+
 })
 
 
-// not sure exactly what we want to happen when game ends
 function endGame() {
-    if (wrongAns >= 3){
-        alert("You Lost!");
-        //update points back to 0?
-        // pointTally = 0;
-        console.log(pointTally)
-        //reloads page when clicking confirm
-        location.reload();
-        return
-    }
+    console.log("the endGame function is working!")
+    var scoreText = `End of quiz! Your score is ${pointTally}!`;
+    var initialDiv = document.querySelector("#initials");
+    initialBox = document.createElement("input");
+
+    contentContainer.setAttribute("class", "hide");
+
+    scoreBoard.removeAttribute("class");
+    finalScore.textContent = scoreText.toString();
+    initialDiv.appendChild(initialBox);
+
+    initialBox.setAttribute("placeholder", "YOUR NAME HERE!");
+    initialBox.setAttribute("class", "save-initials");
+
 }
+
+
+saveButton.addEventListener("click", function () {
+    let userName = initialBox.value.trim();
+    console.log("initials = ", userName);
+
+    let highScores = JSON.parse(localStorage.getItem("score")) || [];
+    console.log("high score = ", highScores);
+    let newScore = {
+        points: pointTally,
+        name: userName
+    }
+    highScores.push(newScore);
+    localStorage.setItem("score", JSON.stringify(highScores));
+    window.location.href = "score.html";
+});
+
 
 
 //https://v1.american-football.api-sports.io/players?team=1&season=2022

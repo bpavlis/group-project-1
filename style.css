@@ -12,6 +12,10 @@ html {
   background-attachment: fixed;
 }
 
+.hide {
+  display: none;
+}
+
 nav {
   display: flex;
 }
@@ -94,6 +98,10 @@ p {
   border-radius: 10px;
   background-color: var(--lightgrn);
   width: 350px;
+}
+
+#scoreboard {
+  margin-top: 200px;
 }
 
 
