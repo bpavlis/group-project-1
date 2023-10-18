@@ -44,7 +44,7 @@ nav {
 p {
   font-size: 14px;
   font-weight: light;
-  color: #333333;
+  color: var(--lightgrn);
   font-family: 'Tilt Neon', sans-serif;
 }
 

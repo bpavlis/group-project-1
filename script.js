@@ -16,9 +16,10 @@ async function getPlayers(teamId) {
     const resp = await fetch(`https://v1.american-football.api-sports.io/players?team=${teamId}&season=2022`, {
         method: "GET",
         headers: {
-            "x-rapidapi-key": "1838aed2376d7324a28d626fe9524ba0"
+            "x-rapidapi-key": "d561b7308ece78af36ebe4724aa26c96"
             // samiye: d52a11a4ff1c64263398d6e91826d199
             //grant: 8a595064b007930f5bae0de0827aeeb9
+            //leah: d561b7308ece78af36ebe4724aa26c96
         }
     })
     return await resp.json()
